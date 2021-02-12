@@ -16,9 +16,12 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
+// Post Api
 Route::get('/get_latest_posts',[PostController::class,'getLatestPosts']);
 Route::get('/get_most_read_posts',[PostController::class,'getMostReadPosts']);
 Route::get('/get_populer_posts',[PostController::class,'getPopulerPosts']);
 Route::get('/get_random_posts',[PostController::class,'getRandomPosts']);
+Route::get('/get_post_detail/{seo}',[PostController::class,'getPostDetail']);
 
+// Category Api
 Route::get('/get_categories',[CategoryController::class,'getCategories']);

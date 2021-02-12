@@ -15,6 +15,9 @@ class Posts_Seed extends Seeder
      */
     public function run()
     {
+
+        Post::factory(100)->create();
+
         $post = new Post();
         $post->title = 'C Dilinde Değişkenler';
         $post->coverPhoto = 'c_degiskenler.jpg';

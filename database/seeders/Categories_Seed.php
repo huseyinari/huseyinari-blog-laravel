@@ -32,5 +32,7 @@ class Categories_Seed extends Seeder
         $category3->categoryDescription = 'Bu kategoride MySql ile ilgili konular yer almaktadır. Başlangıçtan ileri seviyeye kadar, MySql dili ile ilgili çoğu konuyu buradan okuyabilirsiniz.';
         $category3->seo = Str::slug('SQL Dersleri');
         $category3->save();
+
+        Category::factory(10)->create();
     }
 }

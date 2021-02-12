@@ -10,6 +10,7 @@ class Category extends Model
     use HasFactory;
 
     protected $table = 'Categories';
+    protected $fillable = ['categoryName','categoryDescription','seo'];
 
     public function getPosts(){
         return $this->hasMany('App\Models\Post','categoryId','id');

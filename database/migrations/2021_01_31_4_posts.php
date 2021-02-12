@@ -28,7 +28,6 @@ class Posts extends Migration
             $table->foreign('categoryId')->references('id')->on('Categories');
             $table->unique('seo');
             $table->unique('title');
-            $table->unique('coverPhoto');
         });
     }
 

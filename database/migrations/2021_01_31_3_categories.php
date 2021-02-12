@@ -16,7 +16,7 @@ class Categories extends Migration
         Schema::create('Categories', function (Blueprint $table) {
             $table->id();
             $table->string('categoryName');
-            $table->string('categoryDescription');
+            $table->text('categoryDescription');
             $table->string('seo');
             $table->timestamps();
 

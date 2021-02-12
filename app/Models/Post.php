@@ -15,10 +15,10 @@ class Post extends Model
         return $this->hasOne('App\Models\Category','id','categoryId')->select('categoryName');
     }
     public function getPostOwner(){
-        return $this->hasOne('App\Models\User','id','postOwner')->select('nameSurname');
+        return $this->hasOne('App\Models\User','id','postOwner')->select(['nameSurname','about','instagramAddress','twitterAddress','youtubeAddress','facebookAddress','photo']);
     }
     public function getComments(){
-        return $this->hasMany('App\Models\Comment','postId','id');
+        return $this->hasMany('App\Models\Comment','postId','id')->select(['nameSurname','commentContent','created_at']);
     }
     public function getRatings(){
         return $this->hasMany('App\Models\Rating','postId','id')->select('star');

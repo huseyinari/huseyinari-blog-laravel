@@ -19,6 +19,14 @@ class Users extends Migration
             $table->string('email');
             $table->string('password');
             $table->boolean('isActive');
+            // --------- sadece yazarların özellikleri-------
+            $table->text('about')->nullable(true);
+            $table->string('instagramAddress')->nullable(true);
+            $table->string('youtubeAddress')->nullable(true);
+            $table->string('facebookAddress')->nullable(true);
+            $table->string('twitterAddress')->nullable(true);
+            $table->string('photo')->nullable(true);
+            // ------------------------------------
             $table->unsignedBigInteger('roleId');
             $table->timestamps();
 

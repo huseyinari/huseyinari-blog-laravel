@@ -18,6 +18,11 @@ class Users_Seed extends Seeder
         $user = new User();
         $user->nameSurname = 'Hüseyin ARI';
         $user->email = 'hsynari1060@gmail.com';
+        $user->about = 'Merhaba ben Hüseyin ARI. Necmettin Erbakan Üniversitesi Bilgisayar Mühendisliği 4. sınıf öğrencisiyim. Web teknolojileri alanında kendimi geliştirmekteyim. Daha fazla içerik için lütfen takipte kalın...';
+        $user->instagramAddress = 'https://www.instagram.com/hsynnari/';
+        $user->facebookAddress = 'https://www.facebook.com/hsyn.arii';
+        $user->youtubeAddress = 'https://www.youtube.com/channel/UC4G-fAG-njYA8pA_14ocCBQ';
+        $user->photo = 'huseyin-ari.jpg';
         $user->roleId = 1;
         $user->isActive = 1;
         $user->password = Hash::make('ikizler42'); 

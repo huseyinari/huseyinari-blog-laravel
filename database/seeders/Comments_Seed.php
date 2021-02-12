@@ -14,29 +14,6 @@ class Comments_Seed extends Seeder
      */
     public function run()
     {
-        $comment = new Comment();
-        $comment->nameSurname = 'Umut Ulutaş';
-        $comment->commentContent = 'Çok yararlı bir yazı olmuş. Teşekkürler';
-        $comment->postId = 1;
-        $comment->save();
-
-        $comment = new Comment();
-        $comment->nameSurname = 'Mustafa Arı';
-        $comment->commentContent = 'Tam olarak anlayamadım. Yardımcı olur musunuz ?';
-        $comment->postId = 1;
-        $comment->save();
-
-        $comment = new Comment();
-        $comment->nameSurname = 'Oğuzcan Tanrıverdi';
-        $comment->commentContent = 'Çok güzel bir anlatım. Teşekkür ederim.';
-        $comment->postId = 1;
-        $comment->save();
-
-        $comment = new Comment();
-        $comment->nameSurname = 'Gültekin Ağacık';
-        $comment->commentContent = 'Sade ve anlaşılır bir anlatım olmuş tebrikler.';
-        $comment->postId = 2;
-        $comment->save();
-        
+        Comment::factory(100)->create();
     }
 }
