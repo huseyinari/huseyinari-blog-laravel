@@ -10,4 +10,8 @@ class Comment extends Model
     use HasFactory;
 
     protected $table = 'Comments';
+
+    public function getAnswers(){
+        return $this->hasMany('App\Models\Answer','commentId','id')->select(['nameSurname','answerContent','created_at','isAdminAnswer']);
+    }
 }

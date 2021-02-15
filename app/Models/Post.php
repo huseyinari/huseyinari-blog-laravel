@@ -18,11 +18,13 @@ class Post extends Model
         return $this->hasOne('App\Models\User','id','postOwner')->select(['nameSurname','about','instagramAddress','twitterAddress','youtubeAddress','facebookAddress','photo']);
     }
     public function getComments(){
-        return $this->hasMany('App\Models\Comment','postId','id')->select(['nameSurname','commentContent','created_at']);
+        return $this->hasMany('App\Models\Comment','postId','id')->select(['nameSurname','commentContent','created_at','id','isAdminComment']);
     }
     public function getRatings(){
         return $this->hasMany('App\Models\Rating','postId','id')->select('star');
     }
+    // ----------- ilişkilerin dışındaki fonksiyonlar -------------------------
+
     public function getRatingAverage(){ // postun yıldız ortalamasını bul
         $ratings = $this->getRatings()->get();
         $average = 0;
@@ -32,5 +34,13 @@ class Post extends Model
             $average /= $indis++;
         }
         return floor($average);
+    }
+
+    public function getCommentsWithAnswers(){   // yorumları cevaplar ile birlikte getir
+        $comments = $this->getComments()->get(); // ilişki fonksiyonundan yorumları alıp döngü ile yorumları ekle
+        foreach($comments as $comment){
+            $comment->getAnswers;
+        }
+        return $comments;
     }
 }

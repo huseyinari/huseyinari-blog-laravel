@@ -18,6 +18,7 @@ class Comments extends Migration
             $table->string('nameSurname');
             $table->string('commentContent');
             $table->unsignedBigInteger('postId');
+            $table->boolean('isAdminComment')->default(0);
             $table->timestamps();
 
             $table->foreign('postId')->references('id')->on('Posts');

@@ -25,5 +25,11 @@ class Answers_Seed extends Seeder
         $answer->answerContent = 'Rica ederiz. İyi günler...';
         $answer->commentId = 3;
         $answer->save();
+
+        $answer = new Answer();
+        $answer->nameSurname = 'Deniz Tuna';
+        $answer->answerContent = "Java nesne yönelimli programlama";
+        $answer->commentId = 74;
+        $answer->save();
     }
 }

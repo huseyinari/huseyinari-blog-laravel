@@ -18,6 +18,7 @@ class Answers extends Migration
             $table->string('nameSurname');
             $table->string('answerContent');
             $table->unsignedBigInteger('commentId');
+            $table->boolean('isAdminAnswer')->default(0);
             $table->timestamps();
 
             $table->foreign('commentId')->references('id')->on('Comments');

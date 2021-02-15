@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentAnswerController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,6 +23,13 @@ Route::get('/get_most_read_posts',[PostController::class,'getMostReadPosts']);
 Route::get('/get_populer_posts',[PostController::class,'getPopulerPosts']);
 Route::get('/get_random_posts',[PostController::class,'getRandomPosts']);
 Route::get('/get_post_detail/{seo}',[PostController::class,'getPostDetail']);
+Route::get('/get_category_posts/{seo}',[PostController::class,'getCategoryPosts']);
 
 // Category Api
 Route::get('/get_categories',[CategoryController::class,'getCategories']);
+Route::get('/get_category_details/{seo}',[CategoryController::class,'getCategoryDetails']);
+
+// Comment Api
+Route::post('/set_comment',[CommentAnswerController::class,'setComment']);
+// Answer Api
+Route::post('/set_answer',[CommentAnswerController::class,'setAnswer']);

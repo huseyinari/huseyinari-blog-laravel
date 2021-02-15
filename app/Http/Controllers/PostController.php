@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Category;
 
 class PostController extends Controller
 {
@@ -16,6 +17,7 @@ class PostController extends Controller
             $post->getCategory;
             $post->getPostOwner;
             $post->starAverage = $post->getRatingAverage(); // postun yıldız ortalaması
+            $post->commentCount = $post->getComments()->get()->count(); // yorum sayısı
         }
         return response()->json([
             'status' => true,
@@ -108,15 +110,17 @@ class PostController extends Controller
         return $anotherPosts;
     }
     public function getPostDetail($seo){
+
         $postDetail = Post::where('seo',$seo)->get();
         
         if(count($postDetail) !== 0){
             $postDetail = $postDetail[0];
             $postDetail->getCategory;
             $postDetail->getPostOwner;
-            $postDetail->getComments;
+            $postDetail->get_comments = $postDetail->getCommentsWithAnswers();
 
             $anotherPosts = $this->youMayAlsoLike($postDetail->id,$postDetail->categoryId);
+
             return response()->json([
                 'status' => true,
                 'details' => $postDetail,
@@ -128,5 +132,25 @@ class PostController extends Controller
                 'message' => 'Yazı Bulunamadı !'
             ]);
         }
+
+    }
+    public function getCategoryPosts($seo){ // kategoriye ait postları getir
+        $count = 5; // bir sayfada 5 post gösterilecek
+
+        $category = Category::where('seo',$seo)->first();
+
+        if($category === null)
+            return;
+        
+        $posts = Post::where('categoryId',$category->id)->paginate($count);
+        foreach ($posts as $post) {
+            $post->getPostOwner;
+            $post->postContent = strip_tags(htmlspecialchars_decode($post->postContent));   // post içeriğindeki html etiketlerini kaldır
+            $post->commentCount = $post->getComments()->get()->count(); // yorum sayısı
+        }
+        return response()->json([
+            'status' => true,
+            'posts' => $posts
+        ]);
     }
 }
