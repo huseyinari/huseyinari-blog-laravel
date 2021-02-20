@@ -48,7 +48,7 @@ class CommentAnswerController extends Controller
 
     }
 
-    public function setAnswer(Request $request){
+    public function setAnswer(Request $request){ // yorum yanıtla
         $rules = [
             'commentId' => 'required|exists:Comments,id',
             'nameSurname' => 'required|min:5|max:50|string',

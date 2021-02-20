@@ -12,7 +12,7 @@ class Post extends Model
     protected $table = 'Posts';
 
     public function getCategory(){
-        return $this->hasOne('App\Models\Category','id','categoryId')->select('categoryName');
+        return $this->hasOne('App\Models\Category','id','categoryId')->select(['categoryName','seo']);
     }
     public function getPostOwner(){
         return $this->hasOne('App\Models\User','id','postOwner')->select(['nameSurname','about','instagramAddress','twitterAddress','youtubeAddress','facebookAddress','photo']);

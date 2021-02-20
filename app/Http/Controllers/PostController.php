@@ -83,6 +83,7 @@ class PostController extends Controller
             'randomPosts' => $randomPosts
         ]);
     }
+
     public function youMayAlsoLike($currentPostId,$categoryId){ // post ayrıntıları sayfasında kullanılması için bunları da sevebilirsiniz kısmına okunan post ile aynı kategoriden 2 tane random post buluyor
         $allPosts = Post::where('categoryId',$categoryId)->where('id','!=',$currentPostId)->select(['coverPhoto','title','created_at','seo'])->get(); // parametre olarak gelen kategorinin mevcut post hariç tüm postlarını çek
         $maxPostCount = $allPosts->count();
@@ -109,6 +110,7 @@ class PostController extends Controller
         }
         return $anotherPosts;
     }
+
     public function getPostDetail($seo){
 
         $postDetail = Post::where('seo',$seo)->get();
@@ -134,6 +136,7 @@ class PostController extends Controller
         }
 
     }
+
     public function getCategoryPosts($seo){ // kategoriye ait postları getir
         $count = 5; // bir sayfada 5 post gösterilecek
 
@@ -147,10 +150,19 @@ class PostController extends Controller
             $post->getPostOwner;
             $post->postContent = strip_tags(htmlspecialchars_decode($post->postContent));   // post içeriğindeki html etiketlerini kaldır
             $post->commentCount = $post->getComments()->get()->count(); // yorum sayısı
+            $post->starAverage = $post->getRatingAverage(); // postun yıldız ortalaması
         }
         return response()->json([
             'status' => true,
             'posts' => $posts
         ]);
+    }
+
+    public function increaseViewCount(Request $request){ // post görüntülenme sayısını 1 artır - herhangi bir geri dönüş yapmadım
+        $post = Post::where('id',$request->id)->first();
+        if($post){
+            $post->viewCount = $post->viewCount + 1;
+            $post->save();
+        }
     }
 }

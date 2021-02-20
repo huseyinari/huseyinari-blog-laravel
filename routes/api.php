@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentAnswerController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,6 +27,7 @@ Route::get('/get_populer_posts',[PostController::class,'getPopulerPosts']);
 Route::get('/get_random_posts',[PostController::class,'getRandomPosts']);
 Route::get('/get_post_detail/{seo}',[PostController::class,'getPostDetail']);
 Route::get('/get_category_posts/{seo}',[PostController::class,'getCategoryPosts']);
+Route::post('/increase_view_count',[PostController::class,'increaseViewCount']);
 
 // Category Api
 Route::get('/get_categories',[CategoryController::class,'getCategories']);
@@ -33,3 +37,14 @@ Route::get('/get_category_details/{seo}',[CategoryController::class,'getCategory
 Route::post('/set_comment',[CommentAnswerController::class,'setComment']);
 // Answer Api
 Route::post('/set_answer',[CommentAnswerController::class,'setAnswer']);
+
+// Panel Giriş
+Route::post('/login',[AuthController::class,'login']);
+
+// Admin Api
+Route::group(['prefix' =>'admin','middleware'=>'auth.jwt'],function(){
+    Route::post('/logout',[AuthController::class,'logout']);   // çıkış yapma 
+    Route::get('/admin_control',[AdminController::class,'adminControl']);
+    Route::post('/add_post',[AdminController::class,'addPost']);
+    Route::post('/add_image',[AdminController::class,'addImage']);
+});
