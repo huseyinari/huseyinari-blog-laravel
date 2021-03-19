@@ -9,9 +9,12 @@ use App\Models\Category;
 
 class PostController extends Controller
 {
-    public function getLatestPosts(){ // bütün postları en son atılandan başlayarak getir
+    public function getLatestPosts(Request $request){ // bütün postları en son atılandan başlayarak getir
         $count = 5;
-        $latestPosts = Post::orderBy('id','DESC')->paginate($count);
+        $latestPosts = Post::orderBy('id','DESC');
+
+        $latestPosts = $latestPosts->paginate($count);
+
         foreach($latestPosts as $post){
             $post->postContent = strip_tags(htmlspecialchars_decode($post->postContent));   // post içeriğindeki html etiketlerini kaldır
             $post->getCategory;

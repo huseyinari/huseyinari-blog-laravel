@@ -46,5 +46,12 @@ Route::group(['prefix' =>'admin','middleware'=>'auth.jwt'],function(){
     Route::post('/logout',[AuthController::class,'logout']);   // çıkış yapma 
     Route::get('/admin_control',[AdminController::class,'adminControl']);
     Route::post('/add_post',[AdminController::class,'addPost']);
+    Route::post('/delete_post',[AdminController::class,'deletePost']);
+    Route::post('/update_post',[AdminController::class,'updatePost']);
     Route::post('/add_image',[AdminController::class,'addImage']);
+    Route::post('/add_category',[AdminController::class,'addCategory']);
+    Route::post('/delete_category',[AdminController::class,'deleteCategory']);
+    Route::post('/update_category',[AdminController::class,'updateCategory']);
+    Route::get('/get_all_posts',[AdminController::class,'getAllPosts']);
+    Route::get('/get_all_comments',[AdminController::class,'getAllComments']);
 });

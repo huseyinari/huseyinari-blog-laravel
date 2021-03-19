@@ -21,7 +21,7 @@ class Answers extends Migration
             $table->boolean('isAdminAnswer')->default(0);
             $table->timestamps();
 
-            $table->foreign('commentId')->references('id')->on('Comments');
+            $table->foreign('commentId')->references('id')->on('Comments')->onDelete('cascade');
         });
     }
 

@@ -21,7 +21,7 @@ class Comments extends Migration
             $table->boolean('isAdminComment')->default(0);
             $table->timestamps();
 
-            $table->foreign('postId')->references('id')->on('Posts');
+            $table->foreign('postId')->references('id')->on('Posts')->onDelete('cascade');
         });
     }
 

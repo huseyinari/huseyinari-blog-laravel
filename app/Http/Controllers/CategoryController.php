@@ -8,7 +8,7 @@ use App\Models\Category;
 class CategoryController extends Controller
 {
     public function getCategories(){
-        $categories = Category::select(['id','categoryName','seo'])->get();
+        $categories = Category::select(['id','categoryName','categoryDescription','seo'])->get();
         foreach($categories as $category){
             $category->postCount = $category->getPostCount();
         }

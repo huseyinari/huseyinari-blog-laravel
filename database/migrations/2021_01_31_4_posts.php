@@ -25,7 +25,7 @@ class Posts extends Migration
             $table->timestamps();
 
             $table->foreign('postOwner')->references('id')->on('Users');
-            $table->foreign('categoryId')->references('id')->on('Categories');
+            $table->foreign('categoryId')->references('id')->on('Categories')->onDelete('cascade');
             $table->unique('seo');
             $table->unique('title');
         });
