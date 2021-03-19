@@ -15,7 +15,8 @@
         "intervention/image": "^2.5",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "tymon/jwt-auth": "dev-develop"
+        "tymon/jwt-auth": "dev-develop",
+        "fzaninotto/faker": "@dev"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
