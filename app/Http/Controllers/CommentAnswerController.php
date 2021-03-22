@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\Answer;
 use Validator;
+use JWTAuth;
 
 class CommentAnswerController extends Controller
 {
@@ -39,6 +40,12 @@ class CommentAnswerController extends Controller
         $newComment->postId = $request->postId;
         $newComment->nameSurname = $request->nameSurname;
         $newComment->commentContent = $request->commentContent;
+        
+        if($request->token !== '_'){   // request ile token geldiyse ve token admine aitse
+            if(JWTAuth::setToken($request->token)->toUser()->roleId === 1)
+                $newComment->isAdminComment = 1;
+        }
+
         $newComment->save();
 
         return response()->json([
@@ -78,6 +85,12 @@ class CommentAnswerController extends Controller
         $newAnswer->commentId = $request->commentId;
         $newAnswer->nameSurname = $request->nameSurname;
         $newAnswer->answerContent = $request->answerContent;
+
+        if($request->token !== '_'){
+            if(JWTAuth::setToken($request->token)->toUser()->roleId === 1)
+                $newAnswer->isAdminAnswer = 1;
+        }
+
         $newAnswer->save();
 
         return response()->json([

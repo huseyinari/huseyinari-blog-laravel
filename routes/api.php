@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentAnswerController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AboutMeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,8 @@ Route::get('/get_random_posts',[PostController::class,'getRandomPosts']);
 Route::get('/get_post_detail/{seo}',[PostController::class,'getPostDetail']);
 Route::get('/get_category_posts/{seo}',[PostController::class,'getCategoryPosts']);
 Route::post('/increase_view_count',[PostController::class,'increaseViewCount']);
+// About me
+Route::get('/about_me',[AboutMeController::class,'getMyInfo']);
 
 // Category Api
 Route::get('/get_categories',[CategoryController::class,'getCategories']);
@@ -44,14 +47,23 @@ Route::post('/login',[AuthController::class,'login']);
 // Admin Api
 Route::group(['prefix' =>'admin','middleware'=>'auth.jwt'],function(){
     Route::post('/logout',[AuthController::class,'logout']);   // çıkış yapma 
+
     Route::get('/admin_control',[AdminController::class,'adminControl']);
+
     Route::post('/add_post',[AdminController::class,'addPost']);
     Route::post('/delete_post',[AdminController::class,'deletePost']);
     Route::post('/update_post',[AdminController::class,'updatePost']);
+    Route::get('/get_all_posts',[AdminController::class,'getAllPosts']);
+
     Route::post('/add_image',[AdminController::class,'addImage']);
+
     Route::post('/add_category',[AdminController::class,'addCategory']);
     Route::post('/delete_category',[AdminController::class,'deleteCategory']);
     Route::post('/update_category',[AdminController::class,'updateCategory']);
-    Route::get('/get_all_posts',[AdminController::class,'getAllPosts']);
+
     Route::get('/get_all_comments',[AdminController::class,'getAllComments']);
+    Route::post('/delete_comment',[AdminController::class,'deleteComment']);
+    Route::post('/delete_answer',[AdminController::class,'deleteAnswer']);
+
+    Route::post('/update_about_me',[AboutMeController::class,'updateMyInfo']);
 });

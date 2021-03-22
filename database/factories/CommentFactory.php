@@ -23,7 +23,7 @@ class CommentFactory extends Factory
     {
         return [
             'nameSurname' => $this->faker->name(),
-            'postId' => rand(1,106),
+            'postId' => rand(1,100),
             'commentContent' => $this->faker->sentence(8)
         ];
     }

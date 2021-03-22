@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
             Posts_Seed::class,
             Comments_Seed::class,
             Answers_Seed::class,
-            Ratings_Seed::class
         ]);
     }
 }

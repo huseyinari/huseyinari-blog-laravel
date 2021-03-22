@@ -25,7 +25,7 @@ class PostFactory extends Factory
         $title = $this->faker->sentence(7);
         return [
             'title' => $title,
-            'coverPhoto' => 'fake_post.jpg',
+            'coverPhoto' => 'https://www.wallpapertip.com/wmimgs/85-851874_the-new-cisco-crosswork-network-automation-software-cisco.jpg',
             'postOwner' => 1,
             'viewCount' => rand(0,100),
             'postContent' => $this->faker->randomHtml(),

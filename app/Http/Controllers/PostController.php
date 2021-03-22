@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Category;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -19,7 +20,6 @@ class PostController extends Controller
             $post->postContent = strip_tags(htmlspecialchars_decode($post->postContent));   // post içeriğindeki html etiketlerini kaldır
             $post->getCategory;
             $post->getPostOwner;
-            $post->starAverage = $post->getRatingAverage(); // postun yıldız ortalaması
             $post->commentCount = $post->getComments()->get()->count(); // yorum sayısı
         }
         return response()->json([
@@ -117,7 +117,7 @@ class PostController extends Controller
     public function getPostDetail($seo){
 
         $postDetail = Post::where('seo',$seo)->get();
-        
+
         if(count($postDetail) !== 0){
             $postDetail = $postDetail[0];
             $postDetail->getCategory;
@@ -153,7 +153,6 @@ class PostController extends Controller
             $post->getPostOwner;
             $post->postContent = strip_tags(htmlspecialchars_decode($post->postContent));   // post içeriğindeki html etiketlerini kaldır
             $post->commentCount = $post->getComments()->get()->count(); // yorum sayısı
-            $post->starAverage = $post->getRatingAverage(); // postun yıldız ortalaması
         }
         return response()->json([
             'status' => true,
